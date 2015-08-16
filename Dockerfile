@@ -12,8 +12,10 @@ ENV \
   TABLE='' \
   ES_ENDPOINT='' \
   ES_NAME='elasticsearch' \
+  CONNECTOR='FounddotioConnector' \
   AWS_ACCESS_KEY_ID='' \
-  AWS_SECRET_ACCESS_KEY=''
+  AWS_SECRET_ACCESS_KEY='' \
+  ES_API_KEY=''
 
 CMD java \
   -DkinesisInputStream=${KINESIS_STREAM} \
@@ -22,5 +24,6 @@ CMD java \
   -Dlog4j.configuration=log4j.properties \
   -DelasticsearchClusterName=${ES_NAME} \
   -DelasticsearchEndpoint=${ES_ENDPOINT} \
+  -DelasticsearchApiKey=${ES_API_KEY} \
   -cp ${CONSUMER_NAME}/${CONSUMER_NAME}.jar \
-  com.amazonaws.services.logs.connectors.samples.elasticsearch.ElasticsearchConnector
+  com.amazonaws.services.logs.connectors.samples.elasticsearch.${CONNECTOR}
